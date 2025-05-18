@@ -16,11 +16,13 @@ The weather can be either sunny, cloudy, or rainy.
 
 
 # Outcomes and their probabilities
-outcomes = ["Sunny", "Cloudy", "Rainy"]
-probabilities = [0.4667, 0.4, 0.1333]  # Probabilities must sum to 1
+outcomes = ["Sunny", "Cloudy", "Rainy"] # outcomes of weather to randomly select from
+probabilities = [0.4667, 0.4, 0.1333]  # Probabilities must sum to 1, probability of each outcome
+# I came up with these values by summing the chance it was sunny based on all 3 previous possible days 
+# and then dividing by the total sum of sunny, rainy, cloudy
 
 # Pick Weather on the first day
-Weather_init = np.random.choice(outcomes, p=probabilities)
+Weather_init = np.random.choice(outcomes, p=probabilities) # selects randomly the first day of weather based on probabilities 
 
 
 # Create a list to store the weather sequence
@@ -28,24 +30,24 @@ Weather_List = [Weather_init]
 
 
 # Pick Weather for the next 5 days
-for i in range(10000000):
+for i in range(10): # days shortened to 10 for code run time, for statistical significance run with larger number
 
-
+# pick the weather based on the previous day's weather. Porbabilities based on the previous days weather
  if Weather_List[i] == "Sunny":
      probabilities = [0.8, 0.2, 0]  # Probabilities must sum to 1
-     Weather_tomorrow = np.random.choice(outcomes, p=probabilities)
+     Weather_tomorrow = np.random.choice(outcomes, p=probabilities) #selects the next day of weather based on the probabilities if the previous day was sunny
 
  elif Weather_List[i] == "Cloudy":
      probabilities = [0.4, 0.4, 0.2]  # Probabilities must sum to 1
-     Weather_tomorrow = np.random.choice(outcomes, p=probabilities)
+     Weather_tomorrow = np.random.choice(outcomes, p=probabilities) #selects the next day of weather based on the probabilities if the previous day was cloudy
 
  elif Weather_List[i] == "Rainy":
      probabilities = [0.2, 0.6, 0.2]  # Probabilities must sum to 1 
-     Weather_tomorrow = np.random.choice(outcomes, p=probabilities)
+     Weather_tomorrow = np.random.choice(outcomes, p=probabilities) #selects the next day of weather based on the probabilities if the previous day was rainy
 
- Weather_List.append(Weather_tomorrow)
+ Weather_List.append(Weather_tomorrow) # adds the weather tomorrow selected by the if-elif statements above
 
-#print("Weather Sequence: ", Weather_List)
+#print("Weather Sequence: ", Weather_List) # used to verify testing
 
 """
 Exercise 2.c
