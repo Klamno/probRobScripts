@@ -15,39 +15,42 @@ The weather can be either sunny, cloudy, or rainy.
 """
 
 
-# Pick Weather on the first day
-rand_int_init = np.random.randint(1, 4)
+# Outcomes and their probabilities
+outcomes = ["Sunny", "Cloudy", "Rainy"]
+probabilities = [0.4667, 0.4, 0.1333]  # Probabilities must sum to 1
 
-if rand_int_init == 1:
-     Weather_init = "Sunny"
-elif rand_int_init == 2:
-     Weather_init = "Cloudy"
-elif rand_int_init == 3:
-     Weather_init = "Rainy"
+# Pick Weather on the first day
+Weather_init = np.random.choice(outcomes, p=probabilities)
+
 
 # Create a list to store the weather sequence
 Weather_List = [Weather_init]
 
 
 # Pick Weather for the next 5 days
-for i in range(5):
+for i in range(10000000):
 
- rand_int = np.random.randint(1, 4)
 
- if rand_int == 1:
-     Weather_tomorrow = "Sunny"
- elif rand_int == 2:
-     Weather_tomorrow = "Cloudy"
- elif rand_int == 3:
-     Weather_tomorrow = "Rainy"
+ if Weather_List[i] == "Sunny":
+     probabilities = [0.8, 0.2, 0]  # Probabilities must sum to 1
+     Weather_tomorrow = np.random.choice(outcomes, p=probabilities)
+
+ elif Weather_List[i] == "Cloudy":
+     probabilities = [0.4, 0.4, 0.2]  # Probabilities must sum to 1
+     Weather_tomorrow = np.random.choice(outcomes, p=probabilities)
+
+ elif Weather_List[i] == "Rainy":
+     probabilities = [0.2, 0.6, 0.2]  # Probabilities must sum to 1 
+     Weather_tomorrow = np.random.choice(outcomes, p=probabilities)
 
  Weather_List.append(Weather_tomorrow)
 
-print("Weather Sequence: ", Weather_List)
+#print("Weather Sequence: ", Weather_List)
 
 """
 Exercise 2.c
 Calculate the stationary distribution of this markov chain
+
 """
 
 # initialize the sums
@@ -67,3 +70,14 @@ for day in Weather_List:
 print("Sunny: ", Sunny_Sum)
 print("Cloudy: ", Cloudy_Sum)
 print("Rainy: ", Rainy_Sum)
+
+total_days = Sunny_Sum + Cloudy_Sum + Rainy_Sum
+print("Total Days: ", total_days)
+
+Probability_Sunny = Sunny_Sum / total_days
+Probability_Cloudy = Cloudy_Sum / total_days
+Probability_Rainy = Rainy_Sum / total_days
+
+print("Probability of Sunny: ", Probability_Sunny)
+print("Probability of Cloudy: ", Probability_Cloudy)
+print("Probability of Rainy: ", Probability_Rainy)
