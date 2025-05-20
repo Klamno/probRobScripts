@@ -83,3 +83,21 @@ Probability_Rainy = Rainy_Sum / total_days
 print("Probability of Sunny: ", Probability_Sunny)
 print("Probability of Cloudy: ", Probability_Cloudy)
 print("Probability of Rainy: ", Probability_Rainy)
+
+"""
+Excersise 2.d
+What is th estationary distribution based on the state transition matrix?
+Did this one by hand, may come back to solve with system of equations functions in python later
+"""
+
+
+"""
+Exerise 2.e
+What is the entropy of the stationary distribution
+"""
+Probability_Sunny = 0.6429
+Probability_Cloudy = 0.2857
+Probability_Rainy = 0.0714
+
+Hp = - (Probability_Sunny * np.log2(Probability_Sunny) + Probability_Cloudy * np.log2(Probability_Cloudy) + Probability_Rainy * np.log2(Probability_Rainy))
+print("Entropy of the Stationary distribution: ", Hp)
