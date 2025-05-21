@@ -90,6 +90,19 @@ What is th estationary distribution based on the state transition matrix?
 Did this one by hand, may come back to solve with system of equations functions in python later
 """
 
+# equations written out by hand in my notebook using this as an
+# opportunity to practice solving systems of equations in python
+A = np.array([
+    [1, 1, 1], # sum of propabilites equals to 1
+    [-0.2, 0.4, 0.2], # reworking probabilities of it being sunny
+    [0.2, -0.6, 0.6] # reworking probabilities of it being cloudy
+])
+b = np.array([1, 0, 0])
+
+solution = np.linalg.solve(A, b)
+print("Probability Sunny Closed form Solution:", solution[0])
+print("Probability Cloudy Closed form Solution:", solution[1])
+print("Probability Rainy Closed form Solution:", solution[2])
 
 """
 Exerise 2.e
