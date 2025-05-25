@@ -184,12 +184,24 @@ What is the probability it is sunny on day 5?
 """
 print("\n\n Exercise 3.a \n")
 
-print(np.multiply(np.array([1, 2, 3]),np.array([1,2,3])))
-print(measurement_model[:, 0])
-
-"""
 belief = np.array([1, 0, 0]) # initial belief state
 measurement = np.array([2, 2, 3, 1]) # sensor measurements (cloudy, cloudy, rainy, sunny)
+i = 2
 
 for z in measurement:
-"""
+    p_sun_prenorm = measurement_model[0, (z-1)]*np.dot(weather_stm[:, 0], belief)
+    p_cloud_prenorm = measurement_model[1, (z-1)]*np.dot(weather_stm[:, 1], belief)
+    p_rain_prenorm = measurement_model[2, (z-1)]*np.dot(weather_stm[:, 2], belief)
+
+    norm = 1/(p_sun_prenorm + p_cloud_prenorm + p_rain_prenorm)
+
+    p_sun = p_sun_prenorm * norm
+    p_cloud = p_cloud_prenorm * norm
+    p_rain = p_rain_prenorm * norm
+
+    belief = np.array([p_sun, p_cloud, p_rain])
+    print("Day ", i, " - Probability of Sunny: ", p_sun)
+    print("Day ", i, " - Probability of Cloudy: ", p_cloud)
+    print("Day ", i, " - Probability of Rainy: ", p_rain)
+    print("\n")
+    i += 1
