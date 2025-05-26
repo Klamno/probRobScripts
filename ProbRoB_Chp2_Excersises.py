@@ -205,3 +205,40 @@ for z in measurement:
     print("Day ", i, " - Probability of Rainy: ", p_rain)
     print("\n")
     i += 1
+
+"""
+Method for performing the same calculation for 3a using matirx multiplication
+"""
+
+weather_prob = np.array([1, 0, 0]) # initial belief state
+
+def calculate_weather_prob(weather_prob, measurement_model, weather_stm, snsrReading):
+  weather_prob = np.multiply(measurement_model[:,(snsrReading-1)],(weather_stm.T @ weather_prob))
+  weather_prob = weather_prob/np.sum(weather_prob)  # Normalize the probabilities
+  print("prob sunny: ", round(weather_prob[0], 2), "prob cloudy: ", round(weather_prob[1], 2), "prob rainy: ", round(weather_prob[2], 2))
+  return weather_prob
+
+i = 2
+for z in measurement:
+    print("\nDay ", i, " - Sensor Reading: ", z)
+    i += 1
+    weather_prob = calculate_weather_prob(weather_prob, measurement_model, weather_stm, z)
+
+"""
+Exercise 3.b
+suppose day 1 is known to be sunny
+days 2-4 are measured to be sunny, sunny, rainy
+What is the most likely weather on each day?
+Answer in 2 ways:
+one with only the data available to the day in question is used
+one in hidsight using futre data
+"""
+print("\n\n Exercise 3.b \n")
+weather_prob = np.array([1, 0, 0]) # initial belief state
+days = np.array([1, 1, 3]) # sensor measurements (sunny, sunny, rainy)
+
+i = 2
+for z in days:
+    print("\nDay: ", i, " - Sensor Reading: " , z)
+    i += 1
+    weather_prob = calculate_weather_prob(weather_prob, measurement_model, weather_stm, z)
